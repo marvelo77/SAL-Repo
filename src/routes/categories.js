@@ -5,8 +5,8 @@ const mysqlConnection = require('../database/database');
 
 //const { rows } = require('pg/lib/defaults');
 
-router.get('/product', (req, res) => {
-    mysqlConnection.query('SELECT * FROM Product', (err,rows,fields) => {
+router.get('/category', (req, res) => {
+    mysqlConnection.query('SELECT * FROM Category', (err,rows,fields) => {
         if (!err) {
             res.json(rows);
         } else {
