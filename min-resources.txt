@@ -34,4 +34,5 @@ apple icon -> System preferences -> keyboard -> shortcuts -> services -> Files &
     -> New Terminal Tab at folder
 
 
+node src/app.js
 
