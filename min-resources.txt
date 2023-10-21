@@ -9,6 +9,8 @@ Ver 8.0.25 for Win64 on x86_64 (MySQL Community Server - GPL)
 node:
 macOS 64-bit Installer: https://nodejs.org/dist/v14.16.1/node-v14.16.1.pkg
 macOS 64-bit Binary: https://nodejs.org/dist/v14.16.1/node-v14.16.1-darwin-x64.tar.gz
+tar cvfz node-v14.16.1-darwin-x64.tar.gz /Users/<user>/node
+verificar antes si no lo tiene instalado
 
 mysql:
 macOS 64-bit Installer: https://dev.mysql.com/downloads/mysql/
