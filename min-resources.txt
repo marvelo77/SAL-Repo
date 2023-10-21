@@ -16,6 +16,9 @@ mysql:
 macOS 64-bit Installer: https://dev.mysql.com/downloads/mysql/
 macOS 64-bit Binary: https://dev.mysql.com/downloads/mysql/
 
+https://www.youtube.com/watch?v=-BDbOOY9jsc
+root pass: H0laMund0!
+
 [Apple icon -> About this Mac
 "Processor" o "Procesador" = x86
 "Chip" = ARM]
