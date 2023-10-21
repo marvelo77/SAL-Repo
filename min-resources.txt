@@ -1,0 +1,32 @@
+- dev environment -
+node -v
+v14.16.1
+
+mysql.exe -V       
+Ver 8.0.25 for Win64 on x86_64 (MySQL Community Server - GPL)
+
+- mac environment -
+node:
+macOS 64-bit Installer: https://nodejs.org/dist/v14.16.1/node-v14.16.1.pkg
+macOS 64-bit Binary: https://nodejs.org/dist/v14.16.1/node-v14.16.1-darwin-x64.tar.gz
+
+mysql:
+macOS 64-bit Installer: https://dev.mysql.com/downloads/mysql/
+macOS 64-bit Binary: https://dev.mysql.com/downloads/mysql/
+
+[Apple icon -> About this Mac
+"Processor" o "Procesador" = x86
+"Chip" = ARM]
+
+https://github.com/marvelo77/SAL-Repo/archive/refs/heads/dev.zip
+npm run dev
+
+add service for open termianl from current folder
+https://www.youtube.com/watch?v=IAmsq1ULvSk
+
+apple icon -> System preferences -> keyboard -> shortcuts -> services -> Files & Folders 
+    -> New Terminal at folder
+    -> New Terminal Tab at folder
+
+
+
