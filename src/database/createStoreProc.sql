@@ -1,8 +1,8 @@
 -- Active: 1697839897194@@10.11.33.8@3306@saldbd
 
-DROP PROCEDURE spProductGetAll
+DROP PROCEDURE spProductGetFiltering
 
-CREATE PROCEDURE spProductGetAll (
+CREATE PROCEDURE spProductGetFiltering (
 	IN _code VARCHAR(50) ,
     IN _catalogtypeID INT,
     IN _status TINYTEXT
@@ -27,8 +27,6 @@ BEGIN
     AND CatalogtypeID = IFNULL(_catalogtypeID,CatalogtypeID)
     AND Status = IFNULL (_status,'active'); 
 END 
-
-SELECT pr.*,prc.Color,prc.Size,prc.Size,prc.Weight,prc.Dimensions,prc.Price FROM Product pr left join productcharacteristic_ prc on pr.ProductID = prc.ProductID where pr.Status = "active" and pr.CatalogtypeID = ${CatalogtypeID};
 
 DROP PROCEDURE spProductAdd;
 
