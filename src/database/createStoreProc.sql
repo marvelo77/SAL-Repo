@@ -1,5 +1,20 @@
 -- Active: 1697839897194@@10.11.33.8@3306@saldbd
 
+DROP PROCEDURE spGetAllProduct
+
+CREATE PROCEDURE spGetAllProduct (
+	IN _code VARCHAR(50) ,
+    IN _catalogtypeID INT,
+    IN _status TINYTEXT
+)
+BEGIN
+    SELECT ProductID, Code,Name, CatalogtypeID, Status FROM product 
+    WHERE Code = IFNULL(_code,Code)
+    AND CatalogtypeID = IFNULL(_catalogtypeID,CatalogtypeID)
+    AND Status = IFNULL (_status,Status); 
+END 
+
+
 DROP PROCEDURE spProductAdd;
 
 CREATE PROCEDURE spProductAdd (
@@ -20,3 +35,4 @@ BEGIN
 
     SELECT * FROM product;
 END 
+
