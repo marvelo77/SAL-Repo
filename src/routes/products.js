@@ -3,7 +3,7 @@ const router = express.Router();
 
 const mysqlConnection = require('../database/database');
 
-router.get('/product', (req, res) => {
+/* router.get('/product', (req, res) => {
     const { CatalogtypeID } = req.query;
 
     if (CatalogtypeID != null)
@@ -27,6 +27,20 @@ router.get('/product', (req, res) => {
             }
         })
     }
+}); */
+
+router.get('/product', (req, res) => {
+    let { Code, CatalogtypeID, Status } = req.query;
+    if (Code == null){ Code = null}; if (CatalogtypeID == null){ CatalogtypeID = null};if (Status == null){ Status = null};
+    const productListByCategoryId_query = `Call spProductGetAll(${Code},${CatalogtypeID},${Status})`;
+
+        mysqlConnection.query(productListByCategoryId_query, (err,rows,fields) => {
+        if (!err) {
+            res.json(rows);
+        } else {
+            console.log(err);
+        } 
+    })
 });
 
 router.get('/product/:id',(req,res) =>{
