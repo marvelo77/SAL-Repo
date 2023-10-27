@@ -90,6 +90,7 @@ IN _price DECIMAL(10,2)
 BEGIN 
 IF _productID is null THEN
     INSERT INTO product (Code, Name, CatalogtypeID, Status) VALUES (_code, _name, _catalogtypeID, _status);
+    SET _productID = LAST_INSERT_ID();
 ELSE
     UPDATE product pr 
     SET Name = _name,
@@ -103,10 +104,11 @@ ELSE
         Weight = _weight, 
         Dimensions = _dimensions, 
         Price = _price
-    WHERE ProductID = _productID;
+    WHERE ProductID = IFNULL(_productID, ProductID);
 END IF;
 
-/*    SELECT 
+    SELECT 
+    pr.ProductID,
     pr.Code, 
     pr.Name, 
     pr.CatalogtypeID, 
@@ -120,7 +122,7 @@ FROM product pr
 LEFT JOIN productcharacteristic_ prc
 ON pr.ProductID = prc.ProductID
 WHERE pr.ProductID = IFNULL (_productID, pr.ProductID);
-*/END
+END
 
 Call spProductAddOrEdit(null,'nuevo','nuevo producto nombre', 3, 'active', 'Naranja','XXL','5.5 kg','10 x 10 x 3cm',2500.5);
 
@@ -138,3 +140,5 @@ BEGIN
     FROM product pr
     WHERE pr.ProductID = _productID;
 END 
+
+delete from product WHERE ProductID = 301

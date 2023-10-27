@@ -22,7 +22,7 @@ router.get('/product/:id',(req,res) =>{
     const productListById_query = `Call spProductGetByID(${id});`
     mysqlConnection.query(productListById_query,[ id ], (err,rows,fields) => {
         if (!err) {
-            res.json(rows[0]);
+            res.json(rows[0][0]);
         } else {
             console.log(err);
         }
@@ -36,9 +36,8 @@ router.post('/product', (req,res) => {
         mysqlConnection.query(insertProduct_query, [ProductID, Code, Name, CatalogtypeID, Status, Color, Size, Weight, Dimensions, Price], (err,rows,fields) => {
             if (!err) {
                 res.statusCode = 201;
-                console.log(rows);
-                console.log(insertProduct_query);
-                res.json(rows);
+                res.statusMessage = 'Created';
+                res.json(rows[0][0]);
             } else {
                 console.log(err);
             }
@@ -50,11 +49,28 @@ router.delete('/product/:id',(req,res) =>{
     const productDelById_query = `Call spProductDelByID(${id});`
     mysqlConnection.query(productDelById_query,[ id ], (err,rows,fields) => {
         if (!err) {
-            res.status(204);
+            res.statusCode = 204;
             res.statusMessage = 'Deleted';
+            res.json();
         } else {
             console.log(err);
         }
+    })
+});
+
+router.patch('/product/:id',(req,res) =>{
+    const { id } = req.params;
+    let { ProductID, Code, Name, CatalogtypeID, Status, Color, Size, Weight, Dimensions, Price } = req.body;
+    if (ProductID == null) {ProductID=null};
+    const insertProduct_query = `Call spProductAddOrEdit(${ProductID},'${Code}','${Name}', ${CatalogtypeID}, '${Status}', '${Color}','${Size}','${Weight}','${Dimensions}',${Price});`;
+        mysqlConnection.query(insertProduct_query, [ProductID, Code, Name, CatalogtypeID, Status, Color, Size, Weight, Dimensions, Price], (err,rows,fields) => {
+            if (!err) {
+                res.statusCode = 200;
+                res.statusMessage = 'OK';
+                res.json(rows[0][0]);
+            } else {
+                console.log(err);
+            }
     })
 });
 
