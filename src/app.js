@@ -8,9 +8,9 @@ app.set('port',process.env.port || 3000);
 app.use(express.json());
 
 //Routes
-app.use(require('./routes/products'));
-app.use(require('./routes/categories'));
-app.use(require('./routes/orders'));
+app.use(require('./v1.0/routes/productsRoutes'));
+app.use(require('./v1.0/routes/categoriesRoutes'));
+app.use(require('./v1.0/routes/ordersRoutes'));
 
 
 app.listen(app.get('port'), ()=>{

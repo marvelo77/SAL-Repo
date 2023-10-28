@@ -24,8 +24,8 @@ BEGIN
     LEFT JOIN productcharacteristic_ prc 
     ON pr.ProductID = prc.ProductID
     WHERE Code = IFNULL(_code,Code)
-    AND CatalogtypeID = IFNULL(_catalogtypeID,CatalogtypeID)
-    AND Status = IFNULL (_status,'active'); 
+    AND pr.CatalogtypeID = IFNULL(_catalogtypeID,CatalogtypeID)
+    AND pr.Status = IFNULL (_status,'active'); 
 END 
 
 DROP PROCEDURE spProductGetByID
@@ -91,6 +91,7 @@ BEGIN
 IF _productID is null THEN
     INSERT INTO product (Code, Name, CatalogtypeID, Status) VALUES (_code, _name, _catalogtypeID, _status);
     SET _productID = LAST_INSERT_ID();
+    INSERT INTO productcharacteristic_ (ProductID,Color,Size,Weight,Dimensions,Price) VALUES (_productID,_color,_size,_weight,_dimensions,_price);
 ELSE
     UPDATE product pr 
     SET Name = _name,
@@ -123,8 +124,6 @@ LEFT JOIN productcharacteristic_ prc
 ON pr.ProductID = prc.ProductID
 WHERE pr.ProductID = IFNULL (_productID, pr.ProductID);
 END
-
-Call spProductAddOrEdit(null,'nuevo','nuevo producto nombre', 3, 'active', 'Naranja','XXL','5.5 kg','10 x 10 x 3cm',2500.5);
 
 DROP PROCEDURE spProductDelByID
 
