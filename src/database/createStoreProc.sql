@@ -24,8 +24,7 @@ BEGIN
     LEFT JOIN productcharacteristic_ prc 
     ON pr.ProductID = prc.ProductID
     WHERE Code = IFNULL(_code,Code)
-    AND pr.CatalogtypeID = IFNULL(_catalogtypeID,CatalogtypeID)
-    AND pr.Status = IFNULL (_status,'active'); 
+    AND pr.CatalogtypeID = IFNULL(_catalogtypeID,CatalogtypeID);
 END 
 
 DROP PROCEDURE spProductGetByID
@@ -107,7 +106,7 @@ ELSE
         Price = _price
     WHERE ProductID = IFNULL(_productID, ProductID);
 END IF;
-
+IF ROW_COUNT() > 0 THEN
     SELECT 
     pr.ProductID,
     pr.Code, 
@@ -122,7 +121,8 @@ END IF;
 FROM product pr
 LEFT JOIN productcharacteristic_ prc
 ON pr.ProductID = prc.ProductID
-WHERE pr.ProductID = IFNULL (_productID, pr.ProductID);
+WHERE pr.ProductID = IFNULL (_productID, pr.ProductID); 
+END IF;
 END
 
 DROP PROCEDURE spProductDelByID
@@ -138,6 +138,4 @@ BEGIN
     DELETE 
     FROM product pr
     WHERE pr.ProductID = _productID;
-END 
-
-delete from product WHERE ProductID = 301
+END
